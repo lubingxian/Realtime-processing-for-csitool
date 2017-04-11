@@ -31,11 +31,11 @@ while 1
 %%  For Matlab version > R2014a
 %%  p = plot(t1,m1,'MarkerSize',5);
 
-    xlabel('subcarrier index');
+    xlabel('Subcarrier index');
     ylabel('SNR (dB)');
 
 %% Initialize variables
-    ret = cell(1,1);
+    csi_entry = [];
     index = -1;                     % The index of the plots which need shadowing
     broken_perm = 0;                % Flag marking whether we've encountered a broken CSI yet
     triangle = [1 3 6];             % What perm should sum to for 1,2,3 antennas
@@ -71,10 +71,10 @@ while 1
         end
 
         if (code == 187) % (tips: 187 = hex2dec('bb')) Beamforming matrix -- output a record
-            ret{1} = read_bfee(bytes);
+            csi_entry = read_bfee(bytes);
         
-            perm = ret{1}.perm;
-            Nrx = ret{1}.Nrx;
+            perm = csi_entry.perm;
+            Nrx = csi_entry.Nrx;
             if Nrx == 1 % No permuting needed for only 1 antenna
                 continue;
             end
@@ -84,23 +84,23 @@ while 1
                     fprintf('WARN ONCE: Found CSI (%s) with Nrx=%d and invalid perm=[%s]\n', filename, Nrx, int2str(perm));
                 end
             else
-                ret{1}.csi(:,perm(1:Nrx),:) = ret{1}.csi(:,1:Nrx,:);
+                csi_entry.csi(:,perm(1:Nrx),:) = csi_entry.csi(:,1:Nrx,:);
             end
         end
     
         index = mod(index+1, 10);
         
-        csi = get_scaled_csi(ret{1});%CSI data
+        csi = get_scaled_csi(csi_entry);%CSI data
 	%You can use the CSI data here.
 
 	%This plot will show graphics about recent 10 csi packets
         set(p(index*3 + 1),'XData', [1:30], 'YData', db(abs(squeeze(csi(1,1,:)).')), 'color', 'b', 'linestyle', '-');
         set(p(index*3 + 2),'XData', [1:30], 'YData', db(abs(squeeze(csi(1,2,:)).')), 'color', 'g', 'linestyle', '-');
         set(p(index*3 + 3),'XData', [1:30], 'YData', db(abs(squeeze(csi(1,3,:)).')), 'color', 'r', 'linestyle', '-');
-
+        axis([1,30,-10,30]);
         drawnow;
  
-        ret{1} = [];
+        csi_entry = [];
     end
 %% Close file
     fclose(t);
