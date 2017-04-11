@@ -9,7 +9,8 @@ To use this code, you will need all the files from https://github.com/dhalperi/l
 gcc log_to_server.c -o log_to_server
 sudo ./log_to_server <ip> <port>
 ~~~
-NOTE: If you don't have the iwl_connector.h file in netlink (which means you are using an early verison of the [Linux 802.11n CSI Tool](https://github.com/dhalperi/linux-80211n-csitool), please try our [old version](https://github.com/lubingxian/Realtime-processing-for-csitool/tree/master/netlink/old%20version) code.
+<font color=red>
+Tips: If you don't have the iwl_connector.h file in netlink (which means you are using an early verison of the [Linux 802.11n CSI Tool](https://github.com/dhalperi/linux-80211n-csitool), please try our [old version](https://github.com/lubingxian/Realtime-processing-for-csitool/tree/master/netlink/old%20version) code.</font>
 
 2. In matlab:
 run read_bf_socket.m
