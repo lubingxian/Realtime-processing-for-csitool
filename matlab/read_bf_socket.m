@@ -11,7 +11,8 @@ function read_bf_socket()
 
 while 1
 %% Build a TCP Server and wait for connection
-    t = tcpip('0.0.0.0', 8090, 'NetworkRole', 'server');
+    port = 8090;
+    t = tcpip('0.0.0.0', port, 'NetworkRole', 'server');
     t.InputBufferSize = 1024;
     t.Timeout = 15;
     fprintf('Waiting for connection on port %d\n',port);
