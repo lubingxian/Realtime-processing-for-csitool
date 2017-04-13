@@ -75,16 +75,15 @@ while 1
         
             perm = csi_entry.perm;
             Nrx = csi_entry.Nrx;
-            if Nrx == 1 % No permuting needed for only 1 antenna
-                continue;
-            end
-            if sum(perm) ~= triangle(Nrx) % matrix does not contain default values
-                if broken_perm == 0
-                    broken_perm = 1;
-                    fprintf('WARN ONCE: Found CSI (%s) with Nrx=%d and invalid perm=[%s]\n', filename, Nrx, int2str(perm));
+            if Nrx > 1 % No permuting needed for only 1 antenna
+                if sum(perm) ~= triangle(Nrx) % matrix does not contain default values
+                    if broken_perm == 0
+                        broken_perm = 1;
+                        fprintf('WARN ONCE: Found CSI (%s) with Nrx=%d and invalid perm=[%s]\n', filename, Nrx, int2str(perm));
+                    end
+                else
+                    csi_entry.csi(:,perm(1:Nrx),:) = csi_entry.csi(:,1:Nrx,:);
                 end
-            else
-                csi_entry.csi(:,perm(1:Nrx),:) = csi_entry.csi(:,1:Nrx,:);
             end
         end
     
@@ -95,9 +94,13 @@ while 1
 
 	%This plot will show graphics about recent 10 csi packets
         set(p(index*3 + 1),'XData', [1:30], 'YData', db(abs(squeeze(csi(1,1,:)).')), 'color', 'b', 'linestyle', '-');
-        set(p(index*3 + 2),'XData', [1:30], 'YData', db(abs(squeeze(csi(1,2,:)).')), 'color', 'g', 'linestyle', '-');
-        set(p(index*3 + 3),'XData', [1:30], 'YData', db(abs(squeeze(csi(1,3,:)).')), 'color', 'r', 'linestyle', '-');
-        axis([1,30,-10,30]);
+        if Nrx > 1
+            set(p(index*3 + 2),'XData', [1:30], 'YData', db(abs(squeeze(csi(1,2,:)).')), 'color', 'g', 'linestyle', '-');
+        end
+        if Nrx > 2
+            set(p(index*3 + 3),'XData', [1:30], 'YData', db(abs(squeeze(csi(1,3,:)).')), 'color', 'r', 'linestyle', '-');
+        end
+        axis([1,30,-10,40]);
         drawnow;
  
         csi_entry = [];
