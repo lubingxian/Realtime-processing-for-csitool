@@ -22,7 +22,7 @@ read_bf_socket
 # Contact
 Email: bingxian.lu@gmail.com
 
-To cite this tool, the best reference is our paper published in IEEE SECON 2016:
+To cite this work, the best reference is our paper published in IEEE SECON 2016:
 
 Bingxian Lu, Zhicheng Zeng, Lei Wang, Brian Peck, Daji Qiao, and Michael Segal. 
 Confining Wi-Fi Coverage: A Crowdsourced Method Using Physical Layer Information. 
