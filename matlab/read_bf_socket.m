@@ -1,4 +1,4 @@
-%READ_BF_SOCKET Reads in a file of beamforming feedback logs.
+%   READ_BF_SOCKET Reads in a file of beamforming feedback logs.
 %   This version uses the *C* version of read_bfee, compiled with
 %   MATLAB's MEX utility.
 %
