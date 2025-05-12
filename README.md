@@ -35,4 +35,4 @@ IEEE SECON, 2016.
 
 [![Stargazers over time](https://starchart.cc/lubingxian/Realtime-processing-for-csitool.svg)](https://starchart.cc/lubingxian/Realtime-processing-for-csitool)
 
-<img src='https://clustrmaps.com/map_v2.png?cl=ffffff&w=a&t=n&d=C_lfSGxZoZOnpCSuuLKo7s6xxPKDte61nwqToqC-sMI' width = "60%" />
+<a href="https://clustrmaps.com/site/1c609" title="ClustrMaps"><img src='https://www.clustrmaps.com/map_v2.png?d=C_lfSGxZoZOnpCSuuLKo7s6xxPKDte61nwqToqC-sMI&cl=ffffff' /></a>
